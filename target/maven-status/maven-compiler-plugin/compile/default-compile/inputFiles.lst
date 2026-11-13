@@ -8,9 +8,5 @@
 /home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/exception/RegraDeNegocioException.java
 /home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/ILivroRepository.java
 /home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/IUsuarioRepository.java
-/home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/LivroRepositoryEmMemoria.java
-/home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/LivroRepositoryJdbc.java
-/home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/UsuarioRepositoryEmMemoria.java
-/home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/repository/UsuarioRepositoryJdbc.java
 /home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/service/LivroService.java
 /home/compartilhado/Tads_ouchi/tads-lp2-LucasOuchi/src/main/java/br/edu/ifsp/biblioteca/service/UsuarioService.java

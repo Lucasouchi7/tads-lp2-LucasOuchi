@@ -8,7 +8,7 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-public interface ILivroRepository  extends JpaRepository {
+public interface ILivroRepository  extends JpaRepository  <Livro, Long> {
 
     Livro salvar(Livro livro);
 

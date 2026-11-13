@@ -42,7 +42,7 @@ public class LivroService {
             );
         }
 
-        Livro livroCadastrado = this.livroRepository.salvar(livro);
+        Livro livroCadastrado = this.livroRepository.save(livro);
 
         return livroCadastrado;
     }
@@ -52,7 +52,7 @@ public class LivroService {
         Livro livro = this.buscarPorId(livroId);
         livro.adicionarExemplar(new Exemplar(codigoDoExemplar, livro));
 
-        return this.livroRepository.salvar(livro);
+        return this.livroRepository.save(livro);
     }
 
     public Livro adicionarAutor(Long livroId, String nomeAutor) {
@@ -65,7 +65,7 @@ public class LivroService {
 
     public Livro buscarPorId(Long id) {
 
-        Optional<Livro> livroOptional = this.livroRepository.buscarPorId(id);
+        Optional<Livro> livroOptional = this.livroRepository.findById(id);
 
         if (livroOptional.isPresent()) {
             return livroOptional.get();
@@ -79,6 +79,6 @@ public class LivroService {
     }
 
     public List<Livro> listarTodos() {
-        return this.livroRepository.listarTodos();
+        return this.livroRepository.findAll();
     }
 }

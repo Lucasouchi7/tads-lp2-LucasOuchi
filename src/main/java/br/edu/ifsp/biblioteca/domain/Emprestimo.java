@@ -1,3 +1,4 @@
+
 package br.edu.ifsp.biblioteca.domain;
 
 import jakarta.persistence.*;
@@ -20,7 +21,7 @@ public class Emprestimo {
     private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "exemplar_id")
+    @JoinColumn(name = "exemplar_id", nullable = false)
     private Exemplar exemplar;
 
     @Column(name = "data_emprestimo", nullable = false)
@@ -30,7 +31,7 @@ public class Emprestimo {
     private LocalDate dataDevolucao;
 
     @Column(name = "data_prevista_devolucao")
-    private LocalDate datePrevistaDevolucao;
+    private LocalDate dataPrevistaDevolucao;
 
     protected Emprestimo() {}
 
@@ -38,7 +39,7 @@ public class Emprestimo {
         this.usuario = usuario;
         this.exemplar = exemplar;
         this.dataEmprestimo = dataEmprestimo;
-        this.datePrevistaDevolucao = dataEmprestimo.plusDays(14);
+        this.dataPrevistaDevolucao = dataEmprestimo.plusDays(PRAZO_EM_DIAS);
     }
 
     public boolean isAtivo() {
@@ -46,7 +47,7 @@ public class Emprestimo {
     }
 
     public boolean isAtrasado(LocalDate hoje) {
-        return this.isAtivo() && this.datePrevistaDevolucao.isBefore(hoje);
+        return this.isAtivo() && this.dataPrevistaDevolucao.isBefore(hoje);
     }
 
     public long diasDeAtraso(LocalDate hoje) {
@@ -55,7 +56,7 @@ public class Emprestimo {
             return 0;
         }
 
-        return ChronoUnit.DAYS.between(this.dataDevolucao, hoje);
+        return ChronoUnit.DAYS.between(this.dataPrevistaDevolucao, hoje);
     }
 
     public Long getId() {
@@ -78,21 +79,24 @@ public class Emprestimo {
         return dataDevolucao;
     }
 
-    public LocalDate getDatePrevistaDevolucao() {
-        return datePrevistaDevolucao;
+    public LocalDate getDataPrevistaDevolucao() {
+        return dataPrevistaDevolucao;
     }
 
     public void registrarDevolucao(LocalDate quando) {
-        if (this.isAtivo()) {
+        if (!this.isAtivo()) {
             throw new IllegalStateException("Este empréstimo já foi devolvido!");
         }
+
+        this.dataDevolucao = quando;
     }
 
     @Override
     public String toString() {
         return "Emprestimo #" + this.id
-                + " | previsto para " + this.datePrevistaDevolucao
-                + (this.isAtivo() ? " | EM ABERTO " : " | devolvido em: " + this.dataDevolucao);
+                + " | previsto para " + this.dataPrevistaDevolucao
+                + (this.isAtivo()
+                ? " | EM ABERTO "
+                : " | devolvido em: " + this.dataDevolucao);
     }
-
 }
